@@ -1,4 +1,4 @@
-# Marax Timer
+# lelit mara x shot Timer
 
 This project is inspired by [alexrus' Mara X Shot Timer](https://github.com/alexrus/marax_timer) and offers an enhanced version of the software for the shot timer. It is designed specifically for the Lelit MaraX and introduces several new features to improve usability and extend the lifespan of the OLED screen.
 
