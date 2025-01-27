@@ -31,8 +31,9 @@ To use this software, you will need to add the required libraries to the Arduino
 
 1. Clone this repository or download it as a ZIP file.
 2. Open the `.ino` file in the Arduino IDE.
-3. Add all required libraries, including the Timer library mentioned above.
+3. Add all required libraries, including the Timer library mentioned above. - see alexrus' github for reference
 4. Compile and upload the code to your microcontroller.
+5. assemble - i found this video for reference https://youtu.be/e9FXYfr5ro4?si=SsbZIPRW2_kH2V5F&t=484
 
 ## Credits
 
