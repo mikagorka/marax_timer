@@ -4,8 +4,7 @@ This project is inspired by [alexrus' Mara X Shot Timer](https://github.com/alex
 
 ## Features and Improvements
 
-- **Standby Mode:** The display automatically turns off after 15 minutes of inactivity, conserving power and prolonging the lifespan of the OLED screen.
-- **Color Inversion:** To prevent burn-in on the OLED display, the color scheme inverts every 60 seconds during operation.
+- **Standby Mode:** The display automatically turns off after 5 minutes of inactivity, conserving power and prolonging the lifespan of the OLED screen.
 - **Rotated Display:** The display is rotated 180 degrees to fit better in alternative enclosures or cases.
 
 ## Getting Started
