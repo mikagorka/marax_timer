@@ -18,6 +18,7 @@ Timer t;
 // set to true/false when using another type of reed sensor
 bool reedOpenSensor = true;
 bool displayOn = true;
+bool displayInverted = false; // Neuer Zustand für Farbinvertierung
 int timerCount = 0;
 int prevTimerCount = 0;
 bool timerStarted = false;
@@ -25,6 +26,7 @@ long timerStartMillis = 0;
 long timerStopMillis = 0;
 long timerDisplayOffMillis = 0;
 long serialUpdateMillis = 0;
+long lastInvertMillis = 0; // Letzte Farbinvertierung
 int pumpInValue = 0;
 
 const byte numChars = 32;
@@ -59,6 +61,14 @@ void loop() {
   t.update();
   detectChanges();
   getMachineInput();
+
+  // Farbinvertierung alle 60 Sekunden
+  //if (displayOn && (millis() - lastInvertMillis > 60000)) { // 60 Sekunden
+  //  lastInvertMillis = millis();
+  //  displayInverted = !displayInverted;
+  //  display.invertDisplay(displayInverted);
+  //  Serial.println("Display invertiert");
+  //}
 }
 
 void getMachineInput() {
@@ -108,6 +118,7 @@ void detectChanges() {
       timerStarted = false;
       timerStopMillis = 0;
       timerDisplayOffMillis = millis();
+      display.invertDisplay(false);
       Serial.println("Stop pump");
     }
   } else {
@@ -164,6 +175,47 @@ void updateDisplay() {
         } else {
           display.print("X");
         }
+      }
+      if (String(receivedChars).substring(18, 22) == "0000") {
+        if (String(receivedChars[23]) == "1") {
+          display.fillCircle(45, 7, 6, SSD1306_WHITE);
+        }
+        if (String(receivedChars[23]) == "0") {
+          display.drawCircle(45, 7, 6, SSD1306_WHITE);
+        }
+      } else {
+        if (String(receivedChars[23]) == "1") {
+          display.fillRect(39, 1, 12, 12, SSD1306_WHITE);
+        }
+        if (String(receivedChars[23]) == "0") {
+          display.drawRect(39, 1, 12, 12, SSD1306_WHITE);
+        }
+      }
+      // draw temperature
+      if (receivedChars[14] && receivedChars[15] && receivedChars[16]) {
+        display.setTextSize(3);
+        display.setCursor(1, 20);
+        if (String(receivedChars[14]) != "0") {
+          display.print(String(receivedChars[14]));
+        }
+        display.print(String(receivedChars[15]));
+        display.print(String(receivedChars[16]));
+        display.print((char)247);
+        if (String(receivedChars[14]) == "0") {
+          display.print("C");
+        }
+      }
+      // draw steam temperature
+      if (receivedChars[6] && receivedChars[7] && receivedChars[8]) {
+        display.setTextSize(2);
+        display.setCursor(1, 48);
+        if (String(receivedChars[6]) != "0") {
+          display.print(String(receivedChars[6]));
+        }
+        display.print(String(receivedChars[7]));
+        display.print(String(receivedChars[8]));
+        display.print((char)247);
+        display.print("C");
       }
     }
   }
