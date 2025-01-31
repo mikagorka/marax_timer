@@ -18,7 +18,7 @@ Timer t;
 // set to true/false when using another type of reed sensor
 bool reedOpenSensor = true;
 bool displayOn = true;
-bool displayInverted = false; // Neuer Zustand für Farbinvertierung
+bool displayInverted = false; // new state for color inversion
 int timerCount = 0;
 int prevTimerCount = 0;
 bool timerStarted = false;
@@ -26,7 +26,7 @@ long timerStartMillis = 0;
 long timerStopMillis = 0;
 long timerDisplayOffMillis = 0;
 long serialUpdateMillis = 0;
-long lastInvertMillis = 0; // Letzte Farbinvertierung
+long lastInvertMillis = 0; // last color inversion
 int pumpInValue = 0;
 
 const byte numChars = 32;
@@ -51,10 +51,9 @@ void setup() {
 
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   // display.setRotation(0): //Standardausrichtung (keine Drehung)
-  // display.setRotation(1): //90 Grad im Uhrzeigersinn
-  // display.setRotation(2): //180 Grad Drehung
-  // display.setRotation(3): //270 Grad im Uhrzeigersinn
-  display.setRotation(2); // Display um 180 Grad drehen
+  // display.setRotation(1): //90 degree clockwise
+  display.setRotation(2): //180 degree turn
+  // display.setRotation(3): //270 degree clockwise
   display.clearDisplay();
   display.setTextColor(WHITE);
   display.display();
@@ -66,12 +65,12 @@ void loop() {
   detectChanges();
   getMachineInput();
 
-  // Farbinvertierung alle 60 Sekunden
-  //if (displayOn && (millis() - lastInvertMillis > 60000)) { // 60 Sekunden
+  // color inversion every 60 seconds
+  //if (displayOn && (millis() - lastInvertMillis > 60000)) { // 60 seconds
   //  lastInvertMillis = millis();
   //  displayInverted = !displayInverted;
   //  display.invertDisplay(displayInverted);
-  //  Serial.println("Display invertiert");
+  //  Serial.println("Display inverted");
   //}
 }
 
