@@ -50,6 +50,10 @@ void setup() {
   memset(receivedChars, 0, numChars);
 
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  // display.setRotation(0): //Standardausrichtung (keine Drehung)
+  // display.setRotation(1): //90 Grad im Uhrzeigersinn
+  // display.setRotation(2): //180 Grad Drehung
+  // display.setRotation(3): //270 Grad im Uhrzeigersinn
   display.setRotation(2); // Display um 180 Grad drehen
   display.clearDisplay();
   display.setTextColor(WHITE);
